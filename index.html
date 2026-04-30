@@ -303,109 +303,67 @@
         <!-- Swiper -->
         <div class="swiper NaNa">
           <div class="swiper-wrapper">
+            <!-- 1 -->
             <div class="swiper-slide">
-              <iframe
-                width="1100"
-                height="600"
-                src="https://www.youtube.com/embed/esaF_fhcSiU?enablejsapi=1&mute=1&si=-VfRAenRCkbJfrHK"
-                title="YouTube video player"
-                frameborder="0"
-                allow="
-                  accelerometer;
-                  autoplay;
-                  clipboard-write;
-                  encrypted-media;
-                  gyroscope;
-                  picture-in-picture;
-                  web-share;
-                "
-                referrerpolicy="strict-origin-when-cross-origin"
-                allowfullscreen
-              ></iframe>
+              <div class="video-wrap">
+                <video class="slide-video" playsinline muted>
+                  <source src="assets/media/mala1.mp4" type="video/mp4" />
+                </video>
+
+                <button class="play-btn">▶</button>
+                <button class="mute-btn">🔇</button>
+
+                <div class="time">
+                  <span class="current">0:00</span> /
+                  <span class="duration">0:00</span>
+                </div>
+
+                <div class="progress-bar">
+                  <div class="progress"></div>
+                </div>
+              </div>
             </div>
+
+            <!-- 2 -->
             <div class="swiper-slide">
-              <iframe
-                width="1100"
-                height="600"
-                src="https://www.youtube.com/embed/7-BpFy4N2Fk?enablejsapi=1&mute=1&si=duVkM7czm0DaLkeY"
-                title="YouTube video player"
-                frameborder="0"
-                allow="
-                  accelerometer;
-                  autoplay;
-                  clipboard-write;
-                  encrypted-media;
-                  gyroscope;
-                  picture-in-picture;
-                  web-share;
-                "
-                referrerpolicy="strict-origin-when-cross-origin"
-                allowfullscreen
-              ></iframe>
+              <div class="video-wrap">
+                <video class="slide-video" playsinline muted>
+                  <source src="assets/media/jokbal.mp4" type="video/mp4" />
+                </video>
+
+                <button class="play-btn">▶</button>
+                <button class="mute-btn">🔇</button>
+
+                <div class="time">
+                  <span class="current">0:00</span> /
+                  <span class="duration">0:00</span>
+                </div>
+
+                <div class="progress-bar">
+                  <div class="progress"></div>
+                </div>
+              </div>
             </div>
+
+            <!-- 3 -->
             <div class="swiper-slide">
-              <iframe
-                width="1100"
-                height="600"
-                src="https://www.youtube.com/embed/R10_WLJ3Tms?enablejsapi=1&mute=1&si=VAtc0bvwRX3qFEkt"
-                title="YouTube video player"
-                frameborder="0"
-                allow="
-                  accelerometer;
-                  autoplay;
-                  clipboard-write;
-                  encrypted-media;
-                  gyroscope;
-                  picture-in-picture;
-                  web-share;
-                "
-                referrerpolicy="strict-origin-when-cross-origin"
-                allowfullscreen
-              ></iframe>
-            </div>
-            <div class="swiper-slide">
-              <iframe
-                width="1100"
-                height="600"
-                src="https://www.youtube.com/embed/qkp2YJmjoKk?enablejsapi=1&mute=1&si=5G6i9pWhotLOVp98"
-                title="YouTube video player"
-                frameborder="0"
-                allow="
-                  accelerometer;
-                  autoplay;
-                  clipboard-write;
-                  encrypted-media;
-                  gyroscope;
-                  picture-in-picture;
-                  web-share;
-                "
-                referrerpolicy="strict-origin-when-cross-origin"
-                allowfullscreen
-              >
-                ></iframe
-              >
-            </div>
-            <div class="swiper-slide">
-              <iframe
-                width="1100"
-                height="600"
-                src="https://www.youtube.com/embed/JgtvxXP-lFc?enablejsapi=1&mute=1&si=iUCT-WC-_IlZPGYI"
-                title="YouTube video player"
-                frameborder="0"
-                allow="
-                  accelerometer;
-                  autoplay;
-                  clipboard-write;
-                  encrypted-media;
-                  gyroscope;
-                  picture-in-picture;
-                  web-share;
-                "
-                referrerpolicy="strict-origin-when-cross-origin"
-                allowfullscreen
-              >
-                ></iframe
-              >
+              <div class="video-wrap">
+                <video class="slide-video" playsinline muted>
+                  <source src="assets/media/gogi.mp4" type="video/mp4" />
+                </video>
+
+                <button class="play-btn">▶</button>
+                <button class="mute-btn">🔇</button>
+
+                <div class="time">
+                  <span class="current">0:00</span> /
+                  <span class="duration">0:00</span>
+                </div>
+
+                <div class="progress-bar">
+                  <div class="progress"></div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -486,17 +444,13 @@
     <script src="https://unpkg.com/lenis@1.3.23/dist/lenis.min.js"></script>
     <script src="assets/javascript/main_swiper.js"></script>
 
-    <!-- 유튜브 API -->
-    <script src="https://www.youtube.com/iframe_api"></script>
-
     <script>
       let swiper;
-      let players = [];
-      let hasPlayed = []; // 👉 각 영상별 재생 여부 체크
 
-      function onYouTubeIframeAPIReady() {
+      document.addEventListener("DOMContentLoaded", () => {
+        const wraps = document.querySelectorAll(".video-wrap");
+
         swiper = new Swiper(".NaNa", {
-          loop: false,
           effect: "fade",
           speed: 800,
           autoplay: {
@@ -505,55 +459,75 @@
           },
         });
 
-        const iframes = document.querySelectorAll(".NaNa iframe");
+        wraps.forEach((wrap) => {
+          const video = wrap.querySelector("video");
+          const playBtn = wrap.querySelector(".play-btn");
+          const muteBtn = wrap.querySelector(".mute-btn");
+          const progress = wrap.querySelector(".progress");
+          const current = wrap.querySelector(".current");
+          const duration = wrap.querySelector(".duration");
 
-        iframes.forEach((iframe, index) => {
-          hasPlayed[index] = false;
-
-          const player = new YT.Player(iframe, {
-            events: {
-              onStateChange: function (event) {
-                const activeIndex = swiper.realIndex;
-
-                // 👉 현재 슬라이드 아니면 무시
-                if (players[activeIndex] !== event.target) return;
-
-                // ▶ 영상 재생 시작 (광고 포함)
-                if (event.data === YT.PlayerState.PLAYING) {
-                  hasPlayed[activeIndex] = true;
-                  swiper.autoplay.stop(); // 👉 fade 멈춤
-                }
-
-                // ⏸ 영상 멈춤
-                if (event.data === YT.PlayerState.PAUSED) {
-                  // 👉 "실제 재생된 이후" 멈춘 경우만 허용
-                  if (hasPlayed[activeIndex]) {
-                    swiper.autoplay.start(); // 👉 fade 다시 시작
-                  }
-                }
-
-                // ⏹ 영상 끝
-                if (event.data === YT.PlayerState.ENDED) {
-                  hasPlayed[activeIndex] = false;
-                  swiper.autoplay.start(); // 👉 fade 다시 시작
-                }
-              },
-            },
-          });
-
-          players.push(player);
-        });
-
-        swiper.on("slideChange", function () {
-          players.forEach((player) => {
-            if (player && player.pauseVideo) {
-              player.pauseVideo();
+          // ▶ 재생/정지
+          playBtn.addEventListener("click", () => {
+            if (video.paused) {
+              video.play();
+              playBtn.textContent = "⏸";
+              swiper.autoplay.stop();
+            } else {
+              video.pause();
+              playBtn.textContent = "▶";
+              swiper.autoplay.start();
             }
           });
-        });
-      }
-    </script>
 
+          // 🔊 mute
+          muteBtn.addEventListener("click", () => {
+            video.muted = !video.muted;
+            muteBtn.textContent = video.muted ? "🔇" : "🔊";
+          });
+
+          // ⏱ duration 세팅
+          video.addEventListener("loadedmetadata", () => {
+            duration.textContent = formatTime(video.duration);
+          });
+
+          // 📊 progress + time
+          video.addEventListener("timeupdate", () => {
+            const percent = (video.currentTime / video.duration) * 100;
+            progress.style.width = percent + "%";
+
+            current.textContent = formatTime(video.currentTime);
+          });
+
+          // ▶ 끝
+          video.addEventListener("ended", () => {
+            playBtn.textContent = "▶";
+            swiper.autoplay.start();
+          });
+        });
+
+        // 슬라이드 변경 초기화
+        swiper.on("slideChange", () => {
+          wraps.forEach((wrap) => {
+            const video = wrap.querySelector("video");
+            const playBtn = wrap.querySelector(".play-btn");
+            const progress = wrap.querySelector(".progress");
+
+            video.pause();
+            video.currentTime = 0;
+
+            playBtn.textContent = "▶";
+            progress.style.width = "0%";
+          });
+        });
+
+        function formatTime(sec) {
+          const m = Math.floor(sec / 60);
+          const s = Math.floor(sec % 60);
+          return `${m}:${s < 10 ? "0" : ""}${s}`;
+        }
+      });
+    </script>
     <!-- cursor -->
     <script>
       // mouse effect
