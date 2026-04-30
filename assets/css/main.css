@@ -200,12 +200,6 @@ p {
   transform: translate(-50%, -50%);
 }
 
-.mute-btn {
-  right: 10px;
-  top: 10px;
-  transform: none;
-}
-
 /* 시간 */
 .time {
   position: absolute;

@@ -311,7 +311,6 @@
                 </video>
 
                 <button class="play-btn">▶</button>
-                <button class="mute-btn">🔇</button>
 
                 <div class="time">
                   <span class="current">0:00</span> /
@@ -332,7 +331,6 @@
                 </video>
 
                 <button class="play-btn">▶</button>
-                <button class="mute-btn">🔇</button>
 
                 <div class="time">
                   <span class="current">0:00</span> /
@@ -353,7 +351,6 @@
                 </video>
 
                 <button class="play-btn">▶</button>
-                <button class="mute-btn">🔇</button>
 
                 <div class="time">
                   <span class="current">0:00</span> /
@@ -478,12 +475,6 @@
               playBtn.textContent = "▶";
               swiper.autoplay.start();
             }
-          });
-
-          // 🔊 mute
-          muteBtn.addEventListener("click", () => {
-            video.muted = !video.muted;
-            muteBtn.textContent = video.muted ? "🔇" : "🔊";
           });
 
           // ⏱ duration 세팅
